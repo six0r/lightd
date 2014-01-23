@@ -3,7 +3,8 @@ lightd
 
 lightd is a simple HTTP gateway for the lifx binary protocol
 
-requirements :
+###### requirements
+
 - command line PHP binary (>= 5.4)
 - configured lifx bulbs with fixed address or hostname
 
@@ -27,9 +28,9 @@ run lightd from the command line :
 you may want to create a startup script and redirect the standard output to a
 log file if you wish to run it long term.
 
-API methods :
+###### API methods
 
-1/ Power on/off
+1. Power on/off
 
 /power/(on|off)[/<bulb label>]
 
@@ -39,7 +40,7 @@ examples:
 * /power/on/Kitchen
 * /power/off
 
-2/ Set color
+2. Set color
 
 /color/<color>[K<temperature][/<bulb label>]
 
@@ -50,7 +51,7 @@ examples:
 * /color/404040K3500/Living
 * /color/002040
 
-3/ Set pattern
+3. Set pattern
 
 /pattern/<name>[/<transition_time_ms>]
 
@@ -61,3 +62,9 @@ examples:
 * /pattern/off
 * /pattern/movies/10000
 * /pattern/night/3600000
+
+4. Dump state
+
+/state
+
+dumps a JSON encoded array of bulb objects with their current state
