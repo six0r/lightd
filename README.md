@@ -76,3 +76,39 @@ examples:
 ```
 
 dumps a JSON encoded array of bulb objects with their current state
+
+sample output:
+```
+[
+    {
+        "id": "d073d5014736",
+        "label": "Kitchen",
+        "tags": 0,
+        "state_ts": 1390508260,
+        "rgb": "#000000",
+        "power": true,
+        "extra": {
+            "hue": 0,
+            "saturation": 0,
+            "brightness": 0,
+            "dim": 0,
+            "kelvin": 3000
+        }
+    },
+    {
+        "id": "d073d500bf47",
+        "label": "Living",
+        "tags": 0,
+        "state_ts": 1390508261,
+        "rgb": "#191919",
+        "power": true,
+        "extra": {
+            "hue": 0,
+            "saturation": 0,
+            "brightness": 6425,
+            "dim": 0,
+            "kelvin": 2800
+        }
+    }
+]
+```
