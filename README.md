@@ -30,9 +30,11 @@ log file if you wish to run it long term.
 
 #### API methods
 
-1. Power on/off
+##### Power on/off
 
+```
 /power/(on|off)[/<bulb label>]
+```
 
 if bulb_label is not given, the command applies to all bulbs in the lifx mesh
 
@@ -40,9 +42,11 @@ examples:
 * /power/on/Kitchen
 * /power/off
 
-2. Set color
+##### Set color
 
+```
 /color/<color>[K<temperature][/<bulb label>]
+```
 
 if bulb_label is not given, the color is applied to all bulbs in the lifx mesh
 
@@ -51,9 +55,11 @@ examples:
 * /color/404040K3500/Living
 * /color/002040
 
-3. Set pattern
+##### Set pattern
 
+```
 /pattern/<name>[/<transition_time_ms>]
+```
 
 patterns are read from the patterns.ini file
 if transition_time_ms is not given, the pattern is applied immediately
@@ -63,7 +69,7 @@ examples:
 * /pattern/movies/10000
 * /pattern/night/3600000
 
-4. Dump state
+##### Dump state
 
 /state
 
