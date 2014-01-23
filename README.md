@@ -36,8 +36,8 @@ API methods :
 if bulb_label is not given, the command applies to all bulbs in the lifx mesh
 
 examples:
-/power/on/Kitchen
-/power/off
+* /power/on/Kitchen
+* /power/off
 
 2/ Set color
 
@@ -46,9 +46,9 @@ examples:
 if bulb_label is not given, the color is applied to all bulbs in the lifx mesh
 
 examples:
-/color/ffffff/Kitchen
-/color/404040K3500/Living
-/color/002040
+* /color/ffffff/Kitchen
+* /color/404040K3500/Living
+* /color/002040
 
 3/ Set pattern
 
@@ -58,6 +58,6 @@ patterns are read from the patterns.ini file
 if transition_time_ms is not given, the pattern is applied immediately
 
 examples:
-/pattern/off
-/pattern/movies/10000
-/pattern/night/3600000
+* /pattern/off
+* /pattern/movies/10000
+* /pattern/night/3600000
