@@ -71,6 +71,8 @@ examples:
 
 ##### Dump state
 
+```
 /state
+```
 
 dumps a JSON encoded array of bulb objects with their current state
