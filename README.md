@@ -14,13 +14,15 @@ the top of lightd.php
 if everything is set up correctly, you should see something like this when you
 run lightd from the command line :
 
-20140123:204248 lightd/0.9.0 (c) 2014 by sIX / aEGiS <six@aegis-corp.org>
+```
+20140123:204248 lightd/0.9.0 (c) 2014 by sIX / aEGiS
 20140123:204248 loaded 5 patterns
 20140123:204248 connected to lifx
 20140123:204248 API server listening on port 5439
 20140123:204248 found gateway bulb at d073d5014736
 20140123:204248 new bulb registered: Kitchen
 20140123:204249 new bulb registered: Living
+```
 
 you may want to create a startup script and redirect the standard output to a
 log file if you wish to run it long term.
