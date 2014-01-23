@@ -33,7 +33,7 @@ log file if you wish to run it long term.
 ##### Power on/off
 
 ```
-/power/(on|off)[/<bulb label>]
+/power/(on|off)[/<bulb_label>]
 ```
 
 if bulb_label is not given, the command applies to all bulbs in the lifx mesh
@@ -45,7 +45,7 @@ examples:
 ##### Set color
 
 ```
-/color/<color>[K<temperature][/<bulb label>]
+/color/<color>[K<temperature>][/<bulb_label>]
 ```
 
 if bulb_label is not given, the color is applied to all bulbs in the lifx mesh
