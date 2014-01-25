@@ -41,6 +41,7 @@ function _color_unpack($hex, $normalize = false) {
   if (strlen($hex) == 4) {
     $hex = $hex[1] . $hex[1] . $hex[2] . $hex[2] . $hex[3] . $hex[3];
   } $c = hexdec($hex);
+  $out = [];
   for ($i = 16; $i >= 0; $i -= 8) {
     $out[] = (($c >> $i) & 0xFF) / ($normalize ? 255 : 1);
   } return $out;
@@ -48,6 +49,7 @@ function _color_unpack($hex, $normalize = false) {
 
 ### Convert an RGB triplet to a hex color.
 function _color_pack($rgb, $normalize = false) {
+  $out = 0;
   foreach ($rgb as $k => $v) {
     $out |= (($v * ($normalize ? 255 : 1)) << (16 - $k * 8));
   }return '#'. str_pad(dechex($out), 6, 0, STR_PAD_LEFT);
