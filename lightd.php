@@ -179,7 +179,6 @@ class API_Server extends HTTP_Server {
 					]);
 				} else if (!isset($GLOBALS["patterns"][$args[0]])) {
 					throw new Exception("unknown pattern '{$args[0]}'");
-					exit(1);
 				}
 				if ($args[1]) {
 					$fade = $args[1];
