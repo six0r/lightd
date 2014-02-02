@@ -1,5 +1,27 @@
 <?php
 
+/*
+
+lightd - a simple HTTP gateway for the lifx binary protocol
+
+Copyright (C) 2014 Vincent Negrier aka. sIX <six at aegis-corp.org>
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
+
+*/
+
 namespace Lightd\Drivers\Lifx;
 
 require_once "nanoserv/nanoserv.php";
@@ -21,13 +43,10 @@ class Packet {
 
 	static public function Decode($data) {
 		$tmp = unpack("vsize/vprotocol/Nreserved1/a6target_mac/nreserved2/a6gateway_mac/nreserved3/Nts1/Nts2/vtype/nreserved4", $data);
-		$ret = new self();
+		$ret = new self($tmp["type"], bin2hex($tmp["target_mac"]), substr($data, self::HEADER_LENGTH));
 		$ret->protocol = $tmp["protocol"];
-		$ret->target_mac = bin2hex($tmp["target_mac"]);
 		$ret->gateway_mac = bin2hex($tmp["gateway_mac"]);
 		$ret->timestamp = $tmp["ts1"] + $tmp["ts2"];
-		$ret->type = $tmp["type"];
-		$ret->payload = substr($data, self::HEADER_LENGTH);
 		return $ret;
 	}
 
@@ -38,8 +57,7 @@ class Packet {
 	}
 	
 	public function Encode() {
-		$ret = pack("vvNa6na6nNNvn", strlen($this->payload) + self::HEADER_LENGTH, $this->protocol, 0, hex2bin($this->target_mac), 0, hex2bin($this->gateway_mac), 0, $this->timestamp, $this->timestamp, $this->type, 0) . $this->payload;
-		return $ret;
+		return pack("vvNa6na6nNNvn", strlen($this->payload) + self::HEADER_LENGTH, $this->protocol, 0, hex2bin($this->target_mac), 0, hex2bin($this->gateway_mac), 0, $this->timestamp, $this->timestamp, $this->type, 0) . $this->payload;
 	}
 
 }
@@ -52,11 +70,15 @@ abstract class Handler extends Connection_Handler {
 	private $buffer = "";
 	
 	public function on_Connect() {
+		// Send discovery packet
+		$this->Write((new Packet(0x02))->Encode());
 		$this->must_reconnect = false;
-		$dsc = new Packet(0x02);
-		$this->Write($dsc->Encode());
 	}
 
+	public function on_Connect_Fail($errcode) {
+		$this->must_reconnect = true;
+	}
+	
 	public function on_Disconnect() {
 		$this->must_reconnect = true;
 	}
